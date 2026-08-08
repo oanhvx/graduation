@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Thiệp Mời Lễ Tốt Nghiệp</title>
+        <link rel="stylesheet" href="style.css">
+        </head>
+        <body>
+          <!-- Nhạc nền (thay link audio nếu muốn) -->
+            <audio id="bg-music" loop>
+                <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+                  </audio>
+                    <button id="music-btn" onclick="toggleMusic()">🎵 Bật nhạc</button>
+
+                      <main class="hero">
+                          <div class="card">
+                                <p class="subtitle">THƯ MỜI THAM DỰ LỄ TỐT NGHIỆP</p>
+                                      <h1>Lễ Tốt Nghiệp</h1>
+                                            <p class="school">Trường Đại học Công nghiệp Hà Nội</p>
+                                                  
+                                                        <div class="info-box">
+                                                                <p><strong>⏰ Thời gian:</strong> 08:00 - Ngày 20/09/2026</p>
+                                                                        <p><strong>📍 Địa điểm:</strong> Hội trường A, Trường Đại học X</p>
+                                                                              </div>
+
+                                                                                    <div class="rsvp">
+                                                                                            <h3>Gửi lời chúc cho mình nhé!</h3>
+                                                                                                    <form id="wish-form" onsubmit="sendWish(event)">
+                                                                                                              <input type="text" id="name" placeholder="Tên của bạn" required />
+                                                                                                                        <textarea id="message" placeholder="Lời chúc của bạn..." required></textarea>
+                                                                                                                                  <button type="submit">Gửi lời chúc</button>
+                                                                                                                                          </form>
+                                                                                                                                                  <p id="thank-text" class="hidden">Cảm ơn bạn đã gửi lời chúc! ❤️</p>
+                                                                                                                                                        </div>
+                                                                                                                                                            </div>
+                                                                                                                                                              </main>
+
+                                                                                                                                                                <script src="script.js"></script>
+                                                                                                                                                                </body>
+                                                                                                                                                                </html>
+                                                                                                                                                                
