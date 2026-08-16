@@ -2,41 +2,1314 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Thiệp Mời Lễ Tốt Nghiệp</title>
-        <link rel="stylesheet" href="style.css">
-        </head>
-        <body>
-          <!-- Nhạc nền (thay link audio nếu muốn) -->
-            <audio id="bg-music" loop>
-                <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-                  </audio>
-                    <button id="music-btn" onclick="toggleMusic()">🎵 Bật nhạc</button>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thiệp Mời Lễ Tốt Nghiệp — Lê Đình Quốc</title>
+  <meta name="description" content="Trân trọng kính mời quý thầy cô, gia đình và bạn bè đến chung vui trong Lễ Tốt Nghiệp của Lê Đình Quốc — Cử nhân Khoa học Máy tính, Đại học Công nghiệp Hà Nội.">
 
-                      <main class="hero">
-                          <div class="card">
-                                <p class="subtitle">THƯ MỜI THAM DỰ LỄ TỐT NGHIỆP</p>
-                                      <h1>Lễ Tốt Nghiệp</h1>
-                                            <p class="school">Trường Đại học Công nghiệp Hà Nội</p>
-                                                  
-                                                        <div class="info-box">
-                                                                <p><strong>⏰ Thời gian:</strong> 08:00 - Ngày 20/09/2026</p>
-                                                                        <p><strong>📍 Địa điểm:</strong> Hội trường A, Trường Đại học X</p>
-                                                                              </div>
+  <!-- Google Fonts: Inter/Montserrat + Playfair Display + Alex Brush / Cormorant Garamond -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,500;1,600;1,700&display=swap" rel="stylesheet">
 
-                                                                                    <div class="rsvp">
-                                                                                            <h3>Gửi lời chúc cho mình nhé!</h3>
-                                                                                                    <form id="wish-form" onsubmit="sendWish(event)">
-                                                                                                              <input type="text" id="name" placeholder="Tên của bạn" required />
-                                                                                                                        <textarea id="message" placeholder="Lời chúc của bạn..." required></textarea>
-                                                                                                                                  <button type="submit">Gửi lời chúc</button>
-                                                                                                                                          </form>
-                                                                                                                                                  <p id="thank-text" class="hidden">Cảm ơn bạn đã gửi lời chúc! ❤️</p>
-                                                                                                                                                        </div>
-                                                                                                                                                            </div>
-                                                                                                                                                              </main>
+  <style>
+    /* =========================================================
+       1. DESIGN SYSTEM & TOKENS
+       ========================================================= */
+    :root {
+      --bg-dark:        #050C16;
+      --bg-navy-1:      #091527;
+      --bg-navy-2:      #0E1F38;
+      --bg-navy-card:   rgba(14, 31, 56, 0.65);
+      
+      --gold-primary:   #D4AF37;
+      --gold-light:     #F3E5AB;
+      --gold-bright:    #FFE58F;
+      --gold-dark:      #997A15;
+      --gold-gradient:  linear-gradient(135deg, #FFF3B0 0%, #D4AF37 50%, #AA7C11 100%);
+      --gold-glow:      0 0 25px rgba(212, 175, 55, 0.35);
 
-                                                                                                                                                                <script src="script.js"></script>
-                                                                                                                                                                </body>
-                                                                                                                                                                </html>
-                                                                                                                                                                
+      --ivory:          #F8F5EE;
+      --text-muted:     #94A8C0;
+      --text-subtle:    #657D99;
+      --wine:           #6B1D28;
+      
+      --font-heading:   'Playfair Display', serif;
+      --font-body:      'Plus Jakarta Sans', sans-serif;
+      --font-script:    'Alex Brush', cursive;
+      --font-serif-sub: 'Cormorant Garamond', serif;
+
+      --radius-sm:  8px;
+      --radius-md:  16px;
+      --radius-lg:  24px;
+      --radius-full: 999px;
+
+      --transition-fast: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-smooth: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--ivory);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      position: relative;
+    }
+
+    /* Custom Selection */
+    ::selection {
+      background: var(--gold-primary);
+      color: var(--bg-dark);
+    }
+
+    /* Scrollbar Styling */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: var(--bg-dark); }
+    ::-webkit-scrollbar-thumb { background: rgba(212, 175, 55, 0.3); border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--gold-primary); }
+
+    /* Text Gold Gradient Class */
+    .text-gold-gradient {
+      background: var(--gold-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+    }
+
+    /* =========================================================
+       2. PRELOADER & SEAL ANIMATION
+       ========================================================= */
+    #preloader {
+      position: fixed; inset: 0;
+      background: radial-gradient(circle at center, #0B192E 0%, #030810 100%);
+      z-index: 10000;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 20px;
+      transition: opacity 0.8s ease, visibility 0.8s ease;
+    }
+    #preloader.hide {
+      opacity: 0; visibility: hidden; pointer-events: none;
+    }
+
+    .seal-container {
+      position: relative; width: 140px; height: 140px;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .seal-badge {
+      width: 110px; height: 110px; border-radius: 50%;
+      background: radial-gradient(circle at 35% 30%, #F5D77F 0%, #B8860B 50%, #4A121A 100%);
+      box-shadow: 0 0 40px rgba(212, 175, 55, 0.4), inset 0 2px 4px rgba(255,255,255,0.4);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; color: #FFF; font-family: var(--font-heading);
+      border: 2px solid rgba(255, 240, 160, 0.6);
+      animation: sealPulse 2.4s ease-in-out forwards;
+    }
+
+    .seal-icon { font-size: 26px; line-height: 1; margin-bottom: 2px; }
+    .seal-text { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; font-weight: 700; }
+
+    .seal-ring-1 {
+      position: absolute; inset: 0; border-radius: 50%;
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      animation: ringSpin 10s linear infinite, ringPulse 2.4s ease forwards;
+    }
+    .seal-ring-2 {
+      position: absolute; inset: -14px; border-radius: 50%;
+      border: 1px dashed rgba(243, 229, 171, 0.3);
+      animation: ringPulse2 2.4s ease forwards;
+    }
+
+    .preloader-subtext {
+      font-family: var(--font-serif-sub); font-size: 1.25rem; font-style: italic;
+      color: var(--gold-light); letter-spacing: 2px; opacity: 0;
+      animation: fadeInText 1.2s 0.4s ease forwards;
+    }
+
+    @keyframes sealPulse {
+      0% { transform: scale(0.6) rotate(-10deg); opacity: 0; }
+      50% { transform: scale(1.05) rotate(0deg); opacity: 1; }
+      80% { transform: scale(1); opacity: 1; }
+      100% { transform: scale(1.3); opacity: 0; }
+    }
+    @keyframes ringPulse { 0%{transform:scale(0.8);opacity:0} 60%{opacity:1} 100%{transform:scale(1.4);opacity:0} }
+    @keyframes ringPulse2 { 0%{transform:scale(0.8);opacity:0} 60%{opacity:0.6} 100%{transform:scale(1.8);opacity:0} }
+    @keyframes ringSpin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+    @keyframes fadeInText { to{opacity: 1;} }
+
+    /* =========================================================
+       3. AMBIENT PARTICLES & LIGHTING
+       ========================================================= */
+    #particles-canvas {
+      position: fixed; inset: 0; pointer-events: none; z-index: 1;
+    }
+
+    .ambient-glow {
+      position: absolute; border-radius: 50%; filter: blur(100px); pointer-events: none; opacity: 0.15;
+    }
+    .glow-1 { width: 600px; height: 600px; background: #D4AF37; top: -200px; left: -100px; }
+    .glow-2 { width: 500px; height: 500px; background: #6B1D28; top: 40%; right: -150px; }
+    .glow-3 { width: 550px; height: 550px; background: #0E3466; bottom: -100px; left: 20%; }
+
+    /* =========================================================
+       4. NAVIGATION HEADER
+       ========================================================= */
+    header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      padding: 18px 7vw;
+      display: flex; align-items: center; justify-content: space-between;
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      background: rgba(5, 12, 22, 0.75);
+      border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+      transition: var(--transition-fast);
+    }
+    header.scrolled {
+      padding: 12px 7vw;
+      background: rgba(5, 12, 22, 0.92);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    .brand-logo {
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none; font-family: var(--font-heading);
+      font-size: 1.15rem; font-weight: 700; color: var(--ivory);
+      letter-spacing: 0.5px;
+    }
+    .brand-logo span { color: var(--gold-primary); font-size: 1.4rem; }
+
+    nav ul { list-style: none; display: flex; gap: 32px; }
+    nav a {
+      text-decoration: none; color: var(--text-muted);
+      font-size: 0.85rem; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 1px; transition: var(--transition-fast);
+      position: relative; padding: 4px 0;
+    }
+    nav a::after {
+      content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px;
+      background: var(--gold-primary); transition: width 0.3s ease;
+    }
+    nav a:hover { color: var(--gold-light); }
+    nav a:hover::after { width: 100%; }
+
+    .nav-toggle-btn {
+      display: none; background: transparent; border: 1px solid rgba(212,175,55,0.3);
+      color: var(--gold-light); font-size: 1.4rem; padding: 6px 12px;
+      border-radius: var(--radius-sm); cursor: pointer; transition: var(--transition-fast);
+    }
+    .nav-toggle-btn:hover { background: rgba(212,175,55,0.15); }
+
+    /* =========================================================
+       5. HERO SECTION
+       ========================================================= */
+    .hero-section {
+      position: relative; min-height: 100vh;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; padding: 140px 6vw 90px; z-index: 2;
+    }
+
+    .hero-crest {
+      width: 70px; height: 70px; border-radius: 50%;
+      background: rgba(212, 175, 55, 0.08);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 32px; margin-bottom: 24px;
+      box-shadow: var(--gold-glow);
+      animation: floatBadge 4s ease-in-out infinite alternate;
+    }
+
+    @keyframes floatBadge {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-10px); }
+    }
+
+    .hero-eyebrow {
+      font-size: 0.85rem; font-weight: 700; letter-spacing: 6px;
+      color: var(--gold-primary); text-transform: uppercase; margin-bottom: 16px;
+    }
+
+    .hero-title {
+      font-family: var(--font-heading); font-size: clamp(2.8rem, 6.5vw, 5.5rem);
+      font-weight: 700; line-height: 1.1; margin-bottom: 12px;
+    }
+
+    .hero-name {
+      font-family: var(--font-heading); font-size: clamp(2.5rem, 6vw, 4.8rem);
+      font-style: italic; font-weight: 600; margin-bottom: 24px;
+    }
+
+    .hero-subtitle {
+      font-family: var(--font-serif-sub); font-size: clamp(1.3rem, 2.8vw, 1.8rem);
+      color: var(--text-muted); max-width: 720px; line-height: 1.6; font-style: italic;
+      margin-bottom: 36px;
+    }
+
+    .ornament-divider {
+      display: flex; align-items: center; justify-content: center; gap: 16px;
+      margin-bottom: 36px; width: 100%; max-width: 320px;
+    }
+    .ornament-line {
+      flex: 1; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold-primary), transparent);
+    }
+    .ornament-symbol { color: var(--gold-primary); font-size: 14px; }
+
+    .hero-meta-grid {
+      display: flex; flex-wrap: wrap; gap: 16px; justify-content: center;
+    }
+
+    .meta-pill {
+      background: rgba(14, 31, 56, 0.55);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      padding: 12px 26px; border-radius: var(--radius-full);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      display: flex; align-items: center; gap: 10px;
+      font-size: 0.92rem; font-weight: 600; color: var(--ivory);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+      transition: var(--transition-fast);
+    }
+    .meta-pill:hover {
+      border-color: var(--gold-primary);
+      background: rgba(212, 175, 55, 0.12);
+      transform: translateY(-3px);
+      box-shadow: var(--gold-glow);
+    }
+    .meta-pill span.icon { font-size: 18px; }
+
+    .scroll-indicator {
+      position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      color: var(--text-subtle); text-decoration: none; font-size: 0.75rem;
+      letter-spacing: 3px; text-transform: uppercase; font-weight: 600;
+    }
+    .scroll-mouse {
+      width: 22px; height: 36px; border: 2px solid rgba(212, 175, 55, 0.4);
+      border-radius: 12px; position: relative;
+    }
+    .scroll-wheel {
+      width: 4px; height: 8px; background: var(--gold-primary);
+      border-radius: 2px; position: absolute; top: 6px; left: 50%; transform: translateX(-50%);
+      animation: scrollAnim 1.8s ease-in-out infinite;
+    }
+    @keyframes scrollAnim {
+      0% { opacity: 1; transform: translate(-50%, 0); }
+      100% { opacity: 0; transform: translate(-50%, 14px); }
+    }
+
+    /* =========================================================
+       6. COMMON SECTION LAYOUT
+       ========================================================= */
+    .section-container {
+      position: relative; z-index: 2;
+      padding: 110px 7vw; max-width: 1180px; margin: 0 auto;
+    }
+
+    .section-header {
+      text-align: center; margin-bottom: 64px; position: relative;
+    }
+    .section-eyebrow {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 5px;
+      color: var(--gold-primary); text-transform: uppercase; margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: var(--font-heading); font-size: clamp(2.1rem, 4vw, 3rem);
+      font-weight: 700; color: var(--ivory);
+    }
+    .section-ornament {
+      width: 90px; height: 2px; background: var(--gold-gradient);
+      margin: 20px auto 0; position: relative; border-radius: 2px;
+    }
+    .section-ornament::after {
+      content: '✦'; position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%); color: var(--gold-primary);
+      font-size: 11px; background: var(--bg-dark); padding: 0 8px;
+    }
+
+    /* Scroll Reveal Baseline */
+    .reveal-item {
+      opacity: 0; transform: translateY(35px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal-item.visible {
+      opacity: 1; transform: translateY(0);
+    }
+
+    /* =========================================================
+       7. INVITATION LETTER SECTION
+       ========================================================= */
+    .invitation-card-outer {
+      position: relative; padding: 2px; border-radius: var(--radius-lg);
+      background: linear-gradient(145deg, rgba(212,175,55,0.4), rgba(255,255,255,0.05) 50%, rgba(107,29,40,0.3));
+      box-shadow: 0 30px 70px rgba(0,0,0,0.6);
+    }
+
+    .invitation-card {
+      background: radial-gradient(circle at 50% 0%, #10243E 0%, #091628 100%);
+      border-radius: calc(var(--radius-lg) - 2px);
+      padding: 70px 8vw; position: relative; overflow: hidden;
+      text-align: center;
+    }
+
+    /* Corner Accents */
+    .corner-decor {
+      position: absolute; width: 40px; height: 40px;
+      border: 2px solid rgba(212, 175, 55, 0.4); pointer-events: none;
+    }
+    .corner-tl { top: 20px; left: 20px; border-right: none; border-bottom: none; }
+    .corner-tr { top: 20px; right: 20px; border-left: none; border-bottom: none; }
+    .corner-bl { bottom: 20px; left: 20px; border-right: none; border-top: none; }
+    .corner-br { bottom: 20px; right: 20px; border-left: none; border-top: none; }
+
+    .invitation-body p {
+      font-family: var(--font-serif-sub); font-size: clamp(1.35rem, 2.6vw, 1.7rem);
+      line-height: 2; color: var(--ivory); margin-bottom: 24px;
+    }
+
+    .invitation-body p strong {
+      font-family: var(--font-heading); font-size: 1.15em; font-weight: 700;
+      color: var(--gold-light); font-style: normal;
+    }
+
+    .signature-block {
+      margin-top: 48px; pt: 32px; border-top: 1px solid rgba(212, 175, 55, 0.2);
+      display: flex; flex-direction: column; align-items: center;
+    }
+
+    .sig-script {
+      font-family: var(--font-script); font-size: 3.5rem; color: var(--gold-light);
+      line-height: 1; margin-bottom: 8px;
+    }
+    .sig-sub {
+      font-size: 0.88rem; color: var(--text-muted); letter-spacing: 2px; text-transform: uppercase;
+    }
+
+    /* =========================================================
+       8. COUNTDOWN TIMER SECTION
+       ========================================================= */
+    .countdown-flex {
+      display: flex; gap: 24px; justify-content: center; align-items: center; flex-wrap: wrap;
+    }
+
+    .cd-card {
+      min-width: 120px; padding: 28px 16px; border-radius: var(--radius-md);
+      background: rgba(14, 31, 56, 0.7);
+      border: 1px solid rgba(212, 175, 55, 0.25);
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      text-align: center; position: relative; overflow: hidden;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+      transition: var(--transition-smooth);
+    }
+    .cd-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--gold-primary);
+      box-shadow: var(--gold-glow);
+    }
+
+    .cd-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: var(--gold-gradient);
+    }
+
+    .cd-number {
+      font-family: var(--font-heading); font-size: clamp(2.8rem, 5vw, 3.8rem);
+      font-weight: 700; color: var(--gold-light); line-height: 1; margin-bottom: 8px;
+    }
+    .cd-label {
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 3px;
+      color: var(--text-muted); text-transform: uppercase;
+    }
+
+    .cd-dots {
+      font-family: var(--font-heading); font-size: 2.5rem; color: var(--gold-primary);
+      opacity: 0.5; margin-bottom: 20px;
+    }
+
+    /* =========================================================
+       9. TIMELINE / PROGRAMME SECTION
+       ========================================================= */
+    .timeline-wrapper {
+      position: relative; max-width: 860px; margin: 0 auto;
+    }
+    .timeline-wrapper::before {
+      content: ''; position: absolute; left: 110px; top: 0; bottom: 0; width: 2px;
+      background: linear-gradient(180deg, var(--gold-primary) 0%, rgba(212,175,55,0.1) 100%);
+    }
+
+    .timeline-item {
+      display: flex; gap: 40px; margin-bottom: 36px; position: relative; align-items: flex-start;
+    }
+
+    .timeline-time {
+      width: 90px; text-align: right; flex-shrink: 0; pt: 4px;
+      font-family: var(--font-heading); font-size: 1.25rem; font-weight: 700;
+      color: var(--gold-light); position: relative;
+    }
+    .timeline-time::after {
+      content: ''; position: absolute; right: -26px; top: 12px;
+      width: 14px; height: 14px; border-radius: 50%;
+      background: var(--bg-dark); border: 3px solid var(--gold-primary);
+      box-shadow: 0 0 12px var(--gold-primary); z-index: 3;
+    }
+
+    .timeline-content-card {
+      flex: 1; padding: 24px 30px; border-radius: var(--radius-md);
+      background: rgba(14, 31, 56, 0.55);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      transition: var(--transition-fast);
+    }
+    .timeline-item:hover .timeline-content-card {
+      border-color: rgba(212, 175, 55, 0.5);
+      background: rgba(14, 31, 56, 0.8);
+      transform: translateX(6px);
+    }
+
+    .timeline-content-card h4 {
+      font-size: 1.15rem; font-weight: 700; color: var(--ivory); margin-bottom: 6px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .timeline-content-card p {
+      font-size: 0.95rem; color: var(--text-muted); line-height: 1.65;
+    }
+
+    .highlight-tag {
+      background: rgba(212, 175, 55, 0.15); border: 1px solid var(--gold-primary);
+      color: var(--gold-light); padding: 2px 10px; border-radius: var(--radius-full);
+      font-size: 0.75rem; font-weight: 700; margin-left: auto;
+    }
+
+    /* =========================================================
+       10. GALLERY SECTION & LIGHTBOX
+       ========================================================= */
+    .upload-box {
+      border: 2px dashed rgba(212, 175, 55, 0.35); border-radius: var(--radius-md);
+      padding: 36px 20px; text-align: center; cursor: pointer;
+      background: rgba(14, 31, 56, 0.3); transition: var(--transition-fast);
+      margin-bottom: 40px; max-width: 680px; margin-left: auto; margin-right: auto;
+    }
+    .upload-box:hover, .upload-box.dragover {
+      border-color: var(--gold-primary);
+      background: rgba(212, 175, 55, 0.08);
+    }
+    .upload-icon { font-size: 38px; margin-bottom: 10px; }
+    .upload-box p { font-size: 0.95rem; color: var(--text-muted); }
+    .upload-box p strong { color: var(--gold-light); }
+
+    .gallery-masonry {
+      column-count: 4; column-gap: 20px;
+    }
+    .gallery-card {
+      break-inside: avoid; margin-bottom: 20px;
+      border-radius: var(--radius-md); overflow: hidden;
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      background: var(--bg-navy-2); cursor: pointer;
+      position: relative; transition: var(--transition-smooth);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+    }
+    .gallery-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      border-color: var(--gold-light);
+      box-shadow: 0 20px 40px rgba(212, 175, 55, 0.3);
+      z-index: 5;
+    }
+    .gallery-card img {
+      width: 100%; height: auto; display: block;
+      transition: transform 0.6s ease;
+    }
+    .gallery-card:hover img { transform: scale(1.06); }
+
+    /* Shimmer Overlay on hover */
+    .gallery-card::after {
+      content: ''; position: absolute; top: 0; left: -150%; width: 60%; height: 100%;
+      background: linear-gradient(110deg, transparent, rgba(255,255,255,0.25), transparent);
+      transform: skewX(-20deg); transition: left 0.7s ease; pointer-events: none;
+    }
+    .gallery-card:hover::after { left: 150%; }
+
+    /* Lightbox Modal */
+    .lightbox-modal {
+      position: fixed; inset: 0; background: rgba(3, 8, 16, 0.95);
+      backdrop-filter: blur(20px); z-index: 10000;
+      display: flex; align-items: center; justify-content: center;
+      padding: 40px; opacity: 0; visibility: hidden; transition: var(--transition-smooth);
+    }
+    .lightbox-modal.open { opacity: 1; visibility: visible; }
+    .lightbox-modal img {
+      max-width: 90vw; max-height: 85vh; border-radius: var(--radius-md);
+      border: 1px solid rgba(212, 175, 55, 0.5);
+      box-shadow: 0 30px 90px rgba(0,0,0,0.9);
+    }
+    .lb-close-btn {
+      position: absolute; top: 24px; right: 32px;
+      color: var(--gold-light); font-size: 38px; background: none;
+      border: none; cursor: pointer; transition: transform 0.3s;
+    }
+    .lb-close-btn:hover { transform: rotate(90deg); color: #FFF; }
+    .lb-arrow {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      background: rgba(14, 31, 56, 0.8); border: 1px solid rgba(212,175,55,0.4);
+      color: var(--gold-light); font-size: 26px; width: 50px; height: 50px;
+      border-radius: 50%; cursor: pointer; display: flex; align-items: center;
+      justify-content: center; transition: var(--transition-fast);
+    }
+    .lb-arrow:hover { background: var(--gold-primary); color: var(--bg-dark); }
+    .lb-prev { left: 24px; } .lb-next { right: 24px; }
+
+    /* =========================================================
+       11. LOCATION SECTION
+       ========================================================= */
+    .location-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: stretch;
+    }
+
+    .venue-card {
+      background: rgba(14, 31, 56, 0.65);
+      border: 1px solid rgba(212, 175, 55, 0.25);
+      border-radius: var(--radius-lg); padding: 44px;
+      backdrop-filter: blur(16px);
+      display: flex; flex-direction: column; justify-content: space-between;
+    }
+
+    .venue-title {
+      font-family: var(--font-heading); font-size: 1.5rem;
+      color: var(--gold-light); margin-bottom: 20px;
+    }
+
+    .venue-info-list {
+      display: flex; flex-direction: column; gap: 16px; margin-bottom: 30px;
+    }
+    .venue-info-item {
+      display: flex; align-items: flex-start; gap: 14px;
+      font-size: 0.95rem; color: var(--text-muted);
+    }
+    .venue-info-item .icon {
+      font-size: 20px; color: var(--gold-primary); flex-shrink: 0; margin-top: 2px;
+    }
+
+    .btn-maps {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      padding: 14px 32px; border-radius: var(--radius-full);
+      background: var(--gold-gradient); color: var(--bg-dark);
+      font-weight: 700; font-size: 0.95rem; text-decoration: none;
+      box-shadow: 0 10px 25px rgba(212, 175, 55, 0.3);
+      transition: var(--transition-fast);
+    }
+    .btn-maps:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 35px rgba(212, 175, 55, 0.5);
+    }
+
+    .map-container {
+      border-radius: var(--radius-lg); overflow: hidden;
+      border: 1px solid rgba(212, 175, 55, 0.25);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5); min-height: 340px;
+    }
+    .map-container iframe {
+      width: 100%; height: 100%; border: 0; filter: saturate(0.9) contrast(0.95);
+    }
+
+    /* =========================================================
+       12. RSVP & WISHES SECTION
+       ========================================================= */
+    .rsvp-wrapper {
+      max-width: 760px; margin: 0 auto;
+      background: radial-gradient(circle at 50% 0%, #122846 0%, #09172B 100%);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      border-radius: var(--radius-lg); padding: 60px 8vw;
+      text-align: center; box-shadow: 0 25px 60px rgba(0,0,0,0.5);
+    }
+
+    .rsvp-lead {
+      color: var(--text-muted); font-size: 1.05rem; line-height: 1.7;
+      margin-bottom: 32px;
+    }
+
+    .rsvp-input-group {
+      display: flex; flex-direction: column; gap: 16px; align-items: center;
+      margin-bottom: 24px;
+    }
+
+    .form-control {
+      width: 100%; max-width: 440px; padding: 16px 24px;
+      border-radius: var(--radius-full);
+      border: 1px solid rgba(212, 175, 55, 0.35);
+      background: rgba(5, 12, 22, 0.7); color: var(--ivory);
+      font-family: var(--font-body); font-size: 0.95rem; text-align: center;
+      outline: none; transition: var(--transition-fast);
+    }
+    .form-control:focus {
+      border-color: var(--gold-light);
+      box-shadow: var(--gold-glow);
+    }
+    .form-control::placeholder { color: var(--text-subtle); }
+
+    textarea.form-control {
+      border-radius: var(--radius-md); height: 100px; resize: none; text-align: left; padding: 16px 20px;
+    }
+
+    .rsvp-choices-flex {
+      display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 24px;
+    }
+
+    .btn-choice {
+      padding: 14px 32px; border-radius: var(--radius-full);
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      background: transparent; color: var(--ivory);
+      font-family: var(--font-body); font-size: 0.9rem; font-weight: 600;
+      cursor: pointer; transition: var(--transition-fast);
+    }
+    .btn-choice:hover, .btn-choice.active {
+      background: var(--gold-gradient); color: var(--bg-dark);
+      border-color: transparent; box-shadow: var(--gold-glow);
+    }
+
+    .btn-submit-wish {
+      padding: 14px 40px; border-radius: var(--radius-full);
+      background: var(--gold-gradient); color: var(--bg-dark);
+      font-weight: 700; border: none; cursor: pointer;
+      font-size: 0.95rem; transition: var(--transition-fast);
+      box-shadow: 0 10px 25px rgba(212, 175, 55, 0.3);
+    }
+    .btn-submit-wish:hover {
+      transform: translateY(-2px); box-shadow: var(--gold-glow);
+    }
+
+    #rsvp-feedback {
+      margin-top: 20px; font-family: var(--font-serif-sub);
+      font-size: 1.35rem; color: var(--gold-light); min-height: 36px;
+    }
+
+    /* Wishes Board */
+    .wishes-board {
+      margin-top: 48px; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px; text-align: left;
+    }
+    .wish-card {
+      background: rgba(14, 31, 56, 0.5); border: 1px solid rgba(212, 175, 55, 0.2);
+      border-radius: var(--radius-md); padding: 20px; backdrop-filter: blur(8px);
+    }
+    .wish-author {
+      font-weight: 700; color: var(--gold-light); font-size: 0.95rem; margin-bottom: 6px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .wish-author span.badge-status {
+      font-size: 0.7rem; padding: 2px 8px; border-radius: 99px;
+      background: rgba(212, 175, 55, 0.15); border: 1px solid rgba(212, 175, 55, 0.3);
+    }
+    .wish-text { font-size: 0.9rem; color: var(--text-muted); line-height: 1.5; }
+
+
+
+    /* =========================================================
+       14. FOOTER
+       ========================================================= */
+    footer {
+      position: relative; z-index: 2; text-align: center;
+      padding: 70px 7vw 40px; border-top: 1px solid rgba(212, 175, 55, 0.15);
+      background: rgba(3, 8, 16, 0.8);
+    }
+    .footer-script {
+      font-family: var(--font-script); font-size: 2.4rem; color: var(--gold-light); margin-bottom: 10px;
+    }
+    footer p { color: var(--text-muted); font-size: 0.9rem; }
+    footer small {
+      display: block; margin-top: 24px; font-size: 0.75rem;
+      letter-spacing: 2px; color: var(--text-subtle); text-transform: uppercase;
+    }
+
+    /* =========================================================
+       15. RESPONSIVE BREAKPOINTS
+       ========================================================= */
+    @media (max-width: 1024px) {
+      .gallery-masonry { column-count: 3; }
+    }
+
+    @media (max-width: 868px) {
+      .nav-toggle-btn { display: block; }
+      nav {
+        position: fixed; top: 0; right: -100%; width: 75%; height: 100vh;
+        background: rgba(9, 21, 39, 0.97); backdrop-filter: blur(24px);
+        padding: 100px 40px; transition: right 0.4s ease;
+        box-shadow: -10px 0 40px rgba(0,0,0,0.7);
+      }
+      nav.active { right: 0; }
+      nav ul { flex-direction: column; gap: 28px; }
+      nav a { font-size: 1rem; }
+
+      .location-grid { grid-template-columns: 1fr; }
+      .map-container { min-height: 280px; }
+      .gallery-masonry { column-count: 2; column-gap: 12px; }
+      .timeline-wrapper::before { left: 20px; }
+      .timeline-item { flex-direction: column; gap: 12px; padding-left: 44px; }
+      .timeline-time { text-align: left; width: auto; }
+      .timeline-time::after { left: -31px; right: auto; top: 4px; }
+    }
+
+    @media (max-width: 580px) {
+      .section-container { padding: 70px 4vw; }
+      .countdown-flex { gap: 8px; flex-wrap: nowrap; justify-content: center; }
+      .cd-card { min-width: 0; flex: 1; max-width: 80px; padding: 12px 4px; border-radius: var(--radius-sm); }
+      .cd-number { font-size: 1.6rem; margin-bottom: 2px; }
+      .cd-label { font-size: 0.6rem; letter-spacing: 1px; }
+      .cd-dots { display: none; }
+      .gallery-masonry { column-count: 2; column-gap: 8px; }
+      .invitation-card { padding: 50px 6vw; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PRELOADER -->
+  <div id="preloader">
+    <div class="seal-container">
+      <div class="seal-ring-1"></div>
+      <div class="seal-ring-2"></div>
+      <div class="seal-badge">
+        <span class="seal-icon">🎓</span>
+        <span class="seal-text">THIỆP MỜI</span>
+      </div>
+    </div>
+    <div class="preloader-subtext">Lê Đình Quốc · Tốt Nghiệp 2026</div>
+  </div>
+
+  <!-- CANVAS BACKGROUND PARTICLES -->
+  <canvas id="particles-canvas"></canvas>
+
+  <!-- AMBIENT LIGHT GLOWS -->
+  <div class="ambient-glow glow-1"></div>
+  <div class="ambient-glow glow-2"></div>
+  <div class="ambient-glow glow-3"></div>
+
+
+
+  <!-- NAVIGATION HEADER -->
+  <header id="header">
+    <a href="#" class="brand-logo">
+      <span>🎓</span> Grad · Lê Đình Quốc
+    </a>
+    <button class="nav-toggle-btn" id="nav-toggle" aria-label="Menu Toggle">☰</button>
+    <nav id="nav-menu">
+      <ul>
+        <li><a href="#letter">Thư Mời</a></li>
+        <li><a href="#countdown">Đếm Ngược</a></li>
+        <li><a href="#schedule">Lịch Trình</a></li>
+        <li><a href="#album">Album Kỷ Niệm</a></li>
+        <li><a href="#location">Địa Điểm</a></li>
+        <li><a href="#rsvp">Xác Nhận</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="hero-section" id="hero">
+    <div class="hero-crest">🎓</div>
+    <div class="hero-eyebrow">Trân Trọng Kính Mời bạn tới Tham Dự</div>
+    <h1 class="hero-title">LỄ TỐT NGHIỆP</h1>
+    <div class="hero-name text-gold-gradient">Lê Đình Quốc</div>
+    <p class="hero-subtitle">
+      Cử nhân Khoa học Máy tính<br>Trường Công nghệ Thông tin & Truyền thông<br>
+      Đại học Công nghiệp Hà Nội (HaUI)
+    </p>
+
+    <div class="ornament-divider">
+      <div class="ornament-line"></div>
+      <div class="ornament-symbol">✦ 🎓 ✦</div>
+      <div class="ornament-line"></div>
+    </div>
+
+    <div class="hero-meta-grid">
+      <div class="meta-pill"><span class="icon">📅</span> Thứ Ba, 18.08.2026</div>
+      <div class="meta-pill"><span class="icon">🕘</span> 09:30 Sáng</div>
+      <div class="meta-pill"><span class="icon">📍</span> Hội Trường A11 — HaUI</div>
+    </div>
+
+  </section>
+
+  <!-- INVITATION LETTER SECTION -->
+  <section id="letter" class="section-container">
+    <div class="section-header reveal-item">
+      <div class="section-eyebrow">THƯ MỜI</div>
+      <h2 class="section-title">Trân trọng kính mời</h2>
+      <div class="section-ornament"></div>
+    </div>
+
+    <div class="invitation-card-outer reveal-item">
+      <div class="invitation-card">
+        <div class="corner-decor corner-tl"></div>
+        <div class="corner-decor corner-tr"></div>
+        <div class="corner-decor corner-bl"></div>
+        <div class="corner-decor corner-br"></div>
+
+        <div class="invitation-body">
+          <p>
+            Sau thời gian học tập và trưởng thành dưới mái trường Đại học Công nghiệp Hà Nội, hôm nay mình rất vui mừng được chuẩn bị bước sang một chương mới của cuộc đời.
+          </p>
+          <p>
+            Trân trọng kính mời quý thầy cô, gia đình cùng tất cả anh em, bạn bè thân yêu đến tham dự chung vui và chứng kiến giây phút <strong>Lê Đình Quốc</strong> chính thức nhận bằng <strong>Cử nhân Khoa học Máy tính</strong>.
+          </p>
+          <p>
+            Sự hiện diện và những lời chúc tốt đẹp của mọi người chính là niềm hạnh phúc và động lực to lớn nhất dành cho mình!
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COUNTDOWN TIMER SECTION -->
+  <section id="countdown" class="section-container">
+    <div class="section-header reveal-item">
+      <div class="section-eyebrow">ĐẾM NGƯỢC THỜI GIAN</div>
+      <h2 class="section-title">Cùng Chờ Đón Sự Kiện</h2>
+      <div class="section-ornament"></div>
+    </div>
+
+    <div class="countdown-flex reveal-item">
+      <div class="cd-card">
+        <div class="cd-number" id="cd-days">00</div>
+        <div class="cd-label">NGÀY</div>
+      </div>
+      <div class="cd-dots">:</div>
+      <div class="cd-card">
+        <div class="cd-number" id="cd-hours">00</div>
+        <div class="cd-label">GIỜ</div>
+      </div>
+      <div class="cd-dots">:</div>
+      <div class="cd-card">
+        <div class="cd-number" id="cd-mins">00</div>
+        <div class="cd-label">PHÚT</div>
+      </div>
+      <div class="cd-dots">:</div>
+      <div class="cd-card">
+        <div class="cd-number" id="cd-secs">00</div>
+        <div class="cd-label">GIÂY</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROGRAMME SCHEDULE SECTION -->
+  <section id="schedule" class="section-container">
+    <div class="section-header reveal-item">
+      <div class="section-eyebrow">LỊCH TRÌNH CHI TIẾT</div>
+      <h2 class="section-title">Chương Trình Buổi Lễ</h2>
+      <div class="section-ornament"></div>
+    </div>
+
+    <div class="timeline-wrapper">
+      <div class="timeline-item reveal-item">
+        <div class="timeline-time">06:30</div>
+        <div class="timeline-content-card">
+          <h4>Đại Diện Lớp Nhận Lễ Phục</h4>
+          <p>Mang CCCD đến phòng đọc Thư viện để nhận áo cử nhân tốt nghiệp HaUI.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item reveal-item">
+        <div class="timeline-time">07:00</div>
+        <div class="timeline-content-card">
+          <h4>Ổn Định Chỗ Ngồi Ca 1</h4>
+          <p>Sinh viên ca 1 tập trung và ổn định vị trí tại Hội trường Tầng 3 — A11. Người thân có thể theo dõi qua màn hình LED tại Nhà Đa năng.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item reveal-item">
+        <div class="timeline-time">07:30</div>
+        <div class="timeline-content-card">
+          <h4>Khai Mạc Lễ Tốt Nghiệp</h4>
+          <p>Văn nghệ chào mừng, nghi thức Chào cờ, công bố quyết định tốt nghiệp, phát biểu cảm tưởng và vinh danh sinh viên tiêu biểu.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item reveal-item">
+        <div class="timeline-time">09:00</div>
+        <div class="timeline-content-card">
+          <h4>Trao Bằng Tốt Nghiệp · Ca 1</h4>
+          <p>Thực hiện nghi thức trao bằng cho các tân cử nhân Ca 1 tại hội trường lớn.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item reveal-item">
+        <div class="timeline-time">09:30</div>
+        <div class="timeline-content-card" style="border-color: rgba(212,175,55,0.6); background: rgba(212,175,55,0.08);">
+          <h4>
+            Trao Bằng Tốt Nghiệp · Ca 2
+            <span class="highlight-tag">Lượt trao bằng của Quốc 🎓</span>
+          </h4>
+          <p>Sinh viên Ca 2 (bao gồm <strong style="color:var(--gold-light);">Lê Đình Quốc</strong>) chính thức bước lên lễ đài thực hiện nghi thức nhận bằng cử nhân.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item reveal-item">
+        <div class="timeline-time">12:00</div>
+        <div class="timeline-content-card">
+          <h4>Bế Mạc Buổi Lễ & Chụp Ảnh</h4>
+          <p>Khép lại chương trình Lễ Tốt Nghiệp SICT 2026. Chụp ảnh kỷ niệm cùng gia đình, thầy cô và bạn bè.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ALBUM SECTION -->
+  <section id="album" class="section-container">
+    <div class="section-header reveal-item">
+      <div class="section-eyebrow">GHI DẤU KỶ NIỆM</div>
+      <h2 class="section-title">Album Ảnh Khoảnh Khắc</h2>
+      <div class="section-ornament"></div>
+    </div>
+
+
+    <div class="gallery-masonry" id="gallery-masonry"></div>
+  </section>
+
+  <!-- LOCATION SECTION -->
+  <section id="location" class="section-container">
+    <div class="section-header reveal-item">
+      <div class="section-eyebrow">ĐỊA ĐIỂM TỔ CHỨC</div>
+      <h2 class="section-title">Đón Tiếp Mọi Người</h2>
+      <div class="section-ornament"></div>
+    </div>
+
+    <div class="location-grid">
+      <div class="venue-card reveal-item">
+        <div>
+          <h3 class="venue-title">Hội Trường Tầng 3 — Tòa Nhà A11</h3>
+          <div class="venue-info-list">
+            <div class="venue-info-item">
+              <span class="icon">🏫</span>
+              <span><strong>Trường Đại học Công nghiệp Hà Nội (HaUI)</strong></span>
+            </div>
+            <div class="venue-info-item">
+              <span class="icon">📍</span>
+              <span>Số 296 đường Cầu Diễn, Phường Tây Tựu, Quận Bắc Từ Liêm, Hà Nội</span>
+            </div>
+            <div class="venue-info-item">
+              <span class="icon">🚗</span>
+              <span>Bãi đỗ xe ngay cổng chính. Mọi người vui lòng đến trước 09:30 để đón tiếp chu đáo nhất.</span>
+            </div>
+            <div class="venue-info-item">
+              <span class="icon">📞</span>
+              <span>SĐT: 0348115938</span>
+            </div>
+          </div>
+        </div>
+
+        <a href="https://maps.google.com/?q=Đại+học+Công+nghiệp+Hà+Nội" target="_blank" rel="noopener" class="btn-maps">
+          🗺️ Chỉ Đường Trực Tiếp Trên Google Maps
+        </a>
+      </div>
+
+      <div class="map-container reveal-item">
+        <iframe
+          loading="lazy"
+          src="https://www.google.com/maps?q=21.053814,105.736005&z=16&t=m&hl=vi&gl=VN&output=embed"
+          title="Bản đồ HaUI"
+          allowfullscreen>
+        </iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- RSVP & WISHES SECTION -->
+  <section id="rsvp" class="section-container">
+    <div class="section-header reveal-item">
+      <div class="section-eyebrow">Phản Hồi</div>
+      <h2 class="section-title">Bạn sẽ đến chung vui chứ?</h2>
+      <div class="section-ornament"></div>
+    </div>
+
+    <div class="rsvp-wrapper reveal-item">
+      <p class="rsvp-lead">
+        Sự góp mặt của bạn là món quà vô giá nhất đối với mình. Xin vui lòng phản hồi để mình chuẩn bị đón tiếp tốt nhất nhé!
+      </p>
+
+      <form id="rsvp-form" action="https://formspree.io/f/maewnolj" method="POST">
+        <div class="rsvp-input-group">
+          <input type="text" class="form-control" name="Họ và Tên" id="guest-name" placeholder="Nhập họ và tên của bạn..." required>
+        </div>
+
+        <input type="hidden" name="Trạng thái tham dự" id="attendance-status" value="Chắc chắn có mặt">
+
+        <div class="rsvp-choices-flex">
+          <button type="button" class="btn-choice" data-choice="yes">🎓 Chắc chắn có mặt</button>
+          <button type="button" class="btn-choice" data-choice="no">💐 Xin phép vắng mặt</button>
+        </div>
+      </form>
+
+      <div id="rsvp-feedback"></div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-script">Với tất cả lòng biết ơn</div>
+    <p>Lê Đình Quốc xin trân trọng cảm ơn thầy cô, gia đình và bạn bè thân yêu!</p>
+    <small>GRADUATION 2026 · SICT - HaUI · MADE WITH LOVE ❤️</small>
+  </footer>
+
+  <!-- LIGHTBOX MODAL -->
+  <div class="lightbox-modal" id="lightbox">
+    <button class="lb-close-btn" id="lb-close">&times;</button>
+    <button class="lb-arrow lb-prev" id="lb-prev">‹</button>
+    <img id="lb-img" src="" alt="Khoảnh khắc lớn">
+    <button class="lb-arrow lb-next" id="lb-next">›</button>
+  </div>
+
+  <script>
+    /* 1. Preloader */
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.getElementById('preloader').classList.add('hide');
+      }, 1600);
+    });
+
+    /* 2. Header Scroll Effect */
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 40) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    /* 3. Mobile Navigation */
+    const navToggle = document.getElementById('nav-toggle');
+    const navMenu = document.getElementById('nav-menu');
+    navToggle.addEventListener('click', () => navMenu.classList.toggle('active'));
+    document.querySelectorAll('nav a').forEach(link => {
+      link.addEventListener('click', () => navMenu.classList.remove('active'));
+    });
+
+    /* 4. Canvas Particle System */
+    const canvas = document.getElementById('particles-canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    class Particle {
+      constructor() {
+        this.reset();
+      }
+      reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = canvas.height + Math.random() * 100;
+        this.size = Math.random() * 2.5 + 1;
+        this.speedY = Math.random() * 0.8 + 0.3;
+        this.speedX = (Math.random() - 0.5) * 0.4;
+        this.opacity = Math.random() * 0.6 + 0.2;
+      }
+      update() {
+        this.y -= this.speedY;
+        this.x += this.speedX;
+        if (this.y < -10) this.reset();
+      }
+      draw() {
+        ctx.fillStyle = `rgba(212, 175, 55, ${this.opacity})`;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    for (let i = 0; i < 45; i++) {
+      particles.push(new Particle());
+    }
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => { p.update(); p.draw(); });
+      requestAnimationFrame(animateParticles);
+    }
+    animateParticles();
+
+    /* 5. Scroll Reveal Intersection Observer */
+    const revealItems = document.querySelectorAll('.reveal-item');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    revealItems.forEach(item => observer.observe(item));
+
+    /* 6. Live Countdown Timer (18/08/2026 09:30 AM) */
+    const targetDate = new Date('2026-08-18T09:30:00+07:00');
+    function updateCountdown() {
+      const now = new Date();
+      const diff = Math.max(0, targetDate - now);
+      const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const m = Math.floor((diff / (1000 * 60)) % 60);
+      const s = Math.floor((diff / 1000) % 60);
+
+      document.getElementById('cd-days').textContent = String(d).padStart(2, '0');
+      document.getElementById('cd-hours').textContent = String(h).padStart(2, '0');
+      document.getElementById('cd-mins').textContent = String(m).padStart(2, '0');
+      document.getElementById('cd-secs').textContent = String(s).padStart(2, '0');
+    }
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    /* 7. Photo Gallery & Lightbox */
+    let galleryList = [
+      { src: 'img/1.jpg', alt: 'Khoảnh khắc kỷ niệm 1' },
+      { src: 'img/11.jpg', alt: 'Khoảnh khắc kỷ niệm 2' },
+      { src: 'img/12.jpg', alt: 'Khoảnh khắc kỷ niệm 3' },
+      { src: 'img/14.jpg', alt: 'Khoảnh khắc kỷ niệm 4' },
+      { src: 'img/15.jpg', alt: 'Khoảnh khắc kỷ niệm 5' },
+      { src: 'img/17.jpg', alt: 'Khoảnh khắc kỷ niệm 6' },
+      { src: 'img/18.jpg', alt: 'Khoảnh khắc kỷ niệm 7' },
+      { src: 'img/20.jpg', alt: 'Khoảnh khắc kỷ niệm 8' },
+      { src: 'img/21.jpg', alt: 'Khoảnh khắc kỷ niệm 9' },
+      { src: 'img/CXG08041.jpg', alt: 'Khoảnh khắc kỷ niệm 10' },
+      { src: 'img/CXG08042.jpg', alt: 'Khoảnh khắc kỷ niệm 11' },
+      { src: 'img/CXG08049.jpg', alt: 'Khoảnh khắc kỷ niệm 12' },
+      { src: 'img/CXG08109.jpg', alt: 'Khoảnh khắc kỷ niệm 13' },
+      { src: 'img/CXG08115.jpg', alt: 'Khoảnh khắc kỷ niệm 14' },
+      { src: 'img/CXG08122.jpg', alt: 'Khoảnh khắc kỷ niệm 15' },
+      { src: 'img/CXG08150.jpg', alt: 'Khoảnh khắc kỷ niệm 16' },
+      { src: 'img/CXG08172.jpg', alt: 'Khoảnh khắc kỷ niệm 17' },
+      { src: 'img/HVQ01220.jpg', alt: 'Khoảnh khắc kỷ niệm 18' },
+      { src: 'img/HVQ01223.jpg', alt: 'Khoảnh khắc kỷ niệm 19' },
+      { src: 'img/LDQ01041 copy.jpg', alt: 'Khoảnh khắc kỷ niệm 20' }
+    ];
+    const galleryMasonry = document.getElementById('gallery-masonry');
+    const lightbox = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lb-img');
+    let currentLbIdx = 0;
+
+    function renderGallery() {
+      galleryMasonry.innerHTML = '';
+      galleryList.forEach((item, idx) => {
+        const card = document.createElement('div');
+        card.className = 'gallery-card';
+        card.innerHTML = `<img src="${encodeURI(item.src)}" alt="${item.alt}" loading="lazy">`;
+        card.addEventListener('click', () => openLightbox(idx));
+        galleryMasonry.appendChild(card);
+      });
+    }
+    renderGallery();
+
+    /* Lightbox Functions */
+    function openLightbox(idx) {
+      currentLbIdx = idx;
+      lbImg.src = galleryList[idx].src;
+      lightbox.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox() {
+      lightbox.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    function prevPhoto() {
+      currentLbIdx = (currentLbIdx - 1 + galleryList.length) % galleryList.length;
+      lbImg.src = galleryList[currentLbIdx].src;
+    }
+    function nextPhoto() {
+      currentLbIdx = (currentLbIdx + 1) % galleryList.length;
+      lbImg.src = galleryList[currentLbIdx].src;
+    }
+
+    document.getElementById('lb-close').addEventListener('click', closeLightbox);
+    document.getElementById('lb-prev').addEventListener('click', prevPhoto);
+    document.getElementById('lb-next').addEventListener('click', nextPhoto);
+    lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+    document.addEventListener('keydown', (e) => {
+      if (!lightbox.classList.contains('open')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') prevPhoto();
+      if (e.key === 'ArrowRight') nextPhoto();
+    });
+
+
+
+    /* 9. RSVP & Wishes Board */
+    const choiceBtns = document.querySelectorAll('.btn-choice');
+    const attendanceStatusInput = document.getElementById('attendance-status');
+    const guestNameInput = document.getElementById('guest-name');
+    const guestWishInput = document.getElementById('guest-wish');
+    const feedbackMsg = document.getElementById('rsvp-feedback');
+    const wishesBoard = document.getElementById('wishes-board');
+
+    // Local wishes list
+    let wishesList = [
+      { name: 'Nguyễn Văn Nam', wish: 'Chúc mừng Quốc nhé! Chúc tân cử nhân vạn sự thành công!', status: '🎓 Chắc chắn có mặt' },
+      { name: 'Trần Thị Mai', wish: 'Chúc Quốc luôn vững bước và tỏa sáng trên con đường sự nghiệp!', status: '🎓 Chắc chắn có mặt' }
+    ];
+
+    function renderWishes() {
+      if (!wishesBoard) return;
+      wishesBoard.innerHTML = '';
+      wishesList.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'wish-card';
+        card.innerHTML = `
+          <div class="wish-author">
+            ${item.name}
+            <span class="badge-status">${item.status}</span>
+          </div>
+          <div class="wish-text">${item.wish || 'Gửi lời chúc tốt đẹp nhất!'}</div>
+        `;
+        wishesBoard.appendChild(card);
+      });
+    }
+    renderWishes();
+
+    choiceBtns.forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const name = guestNameInput.value.trim();
+        if (!name) {
+          guestNameInput.focus();
+          feedbackMsg.textContent = '⚠️ Vui lòng nhập họ và tên trước nhé!';
+          return;
+        }
+
+        choiceBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const isYes = btn.dataset.choice === 'yes';
+        const status = isYes ? 'Chắc chắn có mặt' : 'Xin phép vắng mặt';
+        attendanceStatusInput.value = status;
+
+        feedbackMsg.textContent = '⏳ Đang gửi xác nhận...';
+        const form = document.getElementById('rsvp-form');
+
+        try {
+          await fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form),
+            headers: { 'Accept': 'application/json' }
+          });
+        } catch (e) {
+          console.log('Submitted locally');
+        }
+
+        if (guestWishInput) {
+          const wish = guestWishInput.value.trim();
+          wishesList.unshift({ name, wish, status });
+          renderWishes();
+          guestWishInput.value = '';
+        }
+
+        feedbackMsg.textContent = isYes
+          ? '🎓 Cảm ơn bạn đã xác nhận! Hẹn gặp bạn tại lễ tốt nghiệp nhé ❤️'
+          : '💐 Cảm ơn bạn đã xác nhận! Rất trân trọng tình cảm này ❤️';
+      });
+    });
+  </script>
+</body>
+</html>
